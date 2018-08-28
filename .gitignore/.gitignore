@@ -1,0 +1,109 @@
+package com.example.android.basket;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.android.basket.R;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class MainActivity extends AppCompatActivity {
+    ArrayList<Integer> arrayA=new ArrayList<Integer>();
+    ArrayList<Integer> arrayB=new ArrayList<Integer>();
+    int numberOfArrayA=0;
+    int numberOfArrayB=0;
+    int scoreTeamA = 0;
+    int scoreTeamB = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
+    }
+    public void addOneForTeamA(View v) {
+        arrayA.add(1);
+        scoreTeamA =scoreTeamA +arrayA.get(numberOfArrayA);
+        numberOfArrayA++;
+        displayForTeamA(scoreTeamA);
+    }
+    public void addTwoForTeamA(View v) {
+        arrayA.add(2);
+        scoreTeamA =scoreTeamA +arrayA.get(numberOfArrayA);
+        numberOfArrayA++;
+        displayForTeamA(scoreTeamA);
+    }
+    public void addThreeForTeamA(View v) {
+        arrayA.add(3);
+        scoreTeamA =scoreTeamA +arrayA.get(numberOfArrayA);
+        numberOfArrayA++;
+        displayForTeamA(scoreTeamA);
+    }
+    public void addOneForTeamB(View v){
+        arrayB.add(1);
+        scoreTeamB =scoreTeamB +arrayB.get(numberOfArrayB);
+        numberOfArrayB++;
+        displayForTeamB(scoreTeamB);
+    }
+    public void addTwoForTeamB(View v){
+        arrayB.add(2);
+        scoreTeamB =scoreTeamB +arrayB.get(numberOfArrayB);
+        numberOfArrayB++;
+        displayForTeamB(scoreTeamB);
+
+    }
+    public void addThreeForTeamB(View v){
+        arrayB.add(3);
+        scoreTeamB =scoreTeamB +arrayB.get(numberOfArrayB);
+        numberOfArrayB++;
+        displayForTeamB(scoreTeamB);
+    }
+    public void displayForTeamA(int score) {
+        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
+        scoreView.setText(String.valueOf(score));
+    }
+    public void displayForTeamB(int score) {
+        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
+        scoreView.setText(String.valueOf(score));
+    }
+    public void reset(View v){
+        numberOfArrayA=0;
+        numberOfArrayB=0;
+        scoreTeamB=0;
+        scoreTeamA=0;
+        displayForTeamB(scoreTeamB);
+        displayForTeamA(scoreTeamA);
+    }
+    public void undoA(View view){
+        if (numberOfArrayA > 0 ){
+        numberOfArrayA--;
+        scoreTeamA =scoreTeamA - arrayA.get(numberOfArrayA);
+        arrayA.remove(numberOfArrayA);
+        displayForTeamA(scoreTeamA);}
+    }
+    public void undoB(View view){
+        if (numberOfArrayB > 0 ){
+            numberOfArrayB--;
+            scoreTeamB =scoreTeamB - arrayB.get(numberOfArrayB);
+            arrayB.remove(numberOfArrayB);
+            displayForTeamB(scoreTeamB);}
+    }
+}
